@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/nomeVeiculo"
+        android:id="@+id/nome_veiculo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/Placa"
+        android:id="@+id/placa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -37,7 +37,7 @@
         android:hint="@string/placa_veiculo"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nomeVeiculo" />
+        app:layout_constraintTop_toBottomOf="@+id/nome_veiculo" />
 
     <EditText
         android:id="@+id/ano"
@@ -48,5 +48,5 @@
         android:hint="@string/ano_veiculo"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Placa" />
+        app:layout_constraintTop_toBottomOf="@+id/placa" />
 </androidx.constraintlayout.widget.ConstraintLayout>
