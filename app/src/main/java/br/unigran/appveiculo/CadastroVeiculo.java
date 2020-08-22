@@ -23,6 +23,7 @@ public class CadastroVeiculo extends AppCompatActivity {
         nome= findViewById(R.id.nome_veiculo);
         ano= findViewById(R.id.ano);
         placa= findViewById(R.id.placa);
+
     }
 
     /**
@@ -40,5 +41,7 @@ public class CadastroVeiculo extends AppCompatActivity {
         CarroDao.salvar(carro);
         //verifico se foi salvo
         System.out.println(CarroDao.getDados());
+      //  finish();//fecha
+        super.onBackPressed();
     }
 }
