@@ -1,6 +1,10 @@
-package br.unigran.domain;
+package br.unigran.domain.entidade;
 
-public class Carro {
+import java.io.Serializable;
+
+public class Carro implements Serializable {
+
+    private Integer id;
     private String nome;
     private String placa;
     private Integer ano;
@@ -27,6 +31,14 @@ public class Carro {
 
     public void setAno(Integer ano) {
         this.ano = ano;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override

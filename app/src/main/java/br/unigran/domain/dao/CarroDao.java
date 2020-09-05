@@ -1,7 +1,9 @@
-package br.unigran.domain;
+package br.unigran.domain.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import br.unigran.domain.entidade.Carro;
 
 public class CarroDao {
     private static List<Carro>dados = new ArrayList<>();
