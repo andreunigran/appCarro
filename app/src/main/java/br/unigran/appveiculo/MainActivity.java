@@ -1,6 +1,7 @@
 package br.unigran.appveiculo;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import br.unigran.db.BancoDados;
 import br.unigran.domain.dao.CarroDaoBanco;
 import br.unigran.domain.entidade.Carro;
@@ -19,6 +22,7 @@ import br.unigran.domain.dao.CarroDao;
 public class MainActivity extends AppCompatActivity {
 
     private ListView listagemCarro;
+    private List <Carro>carros;
     private Integer indice;
     private final Integer OK_TELA_CADASTR0=201;
     private CarroDaoBanco carroDaoBanco ;
@@ -28,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bancoDados= new BancoDados(this);
 
-        carroDaoBanco = new CarroDaoBanco(bancoDados.getReadableDatabase());
 
 
         setContentView(R.layout.activity_main);
@@ -41,12 +44,24 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(),"valor "+i,Toast.LENGTH_LONG).show();
 
-                Carro carro= (Carro) CarroDao.getDados().get(i);
+                Carro carro= (Carro) carros.get(i);
+
                 Intent it = new Intent(MainActivity.this,CadastroVeiculo.class);//cria a intent
                 it.putExtra("carro", carro);
                 startActivityForResult(it,OK_TELA_CADASTR0);//inicia nova activity
             }
         });
+        listagemCarro.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                                                 @Override
+                                                 public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                                                     carroDaoBanco.removeVeiculo( carros.get(i).getId());
+                                                     atualizaListagem();
+                                                     return false;
+                                                 }
+                                             }
+
+                );
 
     }
     /**
@@ -70,9 +85,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void atualizaListagem(){
-
+        carroDaoBanco = new CarroDaoBanco(bancoDados.getReadableDatabase());
+        carros= carroDaoBanco.getCarros();
         //crio adapter passando contexto, layout e lista
-        ArrayAdapter adapter = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item, carroDaoBanco.getCarros());
+        ArrayAdapter adapter = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item, carros);
         listagemCarro.setAdapter(adapter);//envio para lista
     }
 

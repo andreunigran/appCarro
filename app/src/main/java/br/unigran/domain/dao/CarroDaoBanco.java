@@ -17,11 +17,14 @@ public class CarroDaoBanco  {
     }
 
     public void inserirVeiculo(Carro carro){
+
         ContentValues values = new ContentValues();
+
         values.put("NOME",carro.getNome());
         values.put("ANO",carro.getAno());
         values.put("PLACA",carro.getPlaca());
-        conexaoBD.insert("VEICULO",null,values);
+
+        conexaoBD.insertOrThrow("VEICULO",null,values);
     }
     public void atualizarVeiculo(Carro carro){
         ContentValues values = new ContentValues();
@@ -30,7 +33,7 @@ public class CarroDaoBanco  {
         values.put("PLACA",carro.getPlaca());
         conexaoBD.update("VEICULO",values,"ID=?",new String[]{carro.getId().toString()});
     }
-    public void inserirVeiculo(Integer id){
+    public void removeVeiculo(Integer id){
         conexaoBD.delete("VEICULO","ID=?",new String[]{id.toString()});
     }
     public List<Carro> getCarros(){
@@ -39,20 +42,39 @@ public class CarroDaoBanco  {
         Carro carro;
 
 
-        cursor = conexaoBD.rawQuery("SELECT * FROM VEICULO",null);
+        cursor = conexaoBD.rawQuery("SELECT * FROM VEICULO ",null);
+
         cursor.moveToFirst();
+
+// consulta com while
+//       while (cursor.moveToNext()){
+//            carro=new Carro();
+//            carro.setId(
+//                    cursor.getInt(cursor.getColumnIndex("ID"))
+//            );
+//            carro.setNome(cursor.getString(cursor.getColumnIndex("NOME")));
+//            carro.setPlaca(cursor.getString(cursor.getColumnIndex("PLACA")));
+//            carro.setAno(cursor.getInt(cursor.getColumnIndex("ANO")));
+//
+//            carros.add(carro);
+//        }
+
         for (int i = 0; i < cursor.getCount(); i++) {
+
             carro=new Carro();
-            carro.setId(cursor.getInt(cursor.getColumnIndex("ID")));
+            carro.setId(
+                    cursor.getInt(cursor.getColumnIndex("ID"))
+            );
             carro.setNome(cursor.getString(cursor.getColumnIndex("NOME")));
             carro.setPlaca(cursor.getString(cursor.getColumnIndex("PLACA")));
             carro.setAno(cursor.getInt(cursor.getColumnIndex("ANO")));
+
             carros.add(carro);
+
             cursor.moveToNext();
         }
         return carros;
     }
-
 
 
 

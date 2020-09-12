@@ -20,13 +20,10 @@ public class CadastroVeiculo extends AppCompatActivity {
     private EditText placa;
     private BancoDados bancoDados;
     private CarroDaoBanco carroDaoBanco;
-
+    private Carro carro;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bancoDados = new BancoDados(this);
-        carroDaoBanco = new CarroDaoBanco(bancoDados.getWritableDatabase());
-
 
         setContentView(R.layout.activity_cadastro_veiculo);
         //vinculo com a tela
@@ -37,10 +34,11 @@ public class CadastroVeiculo extends AppCompatActivity {
 
 
         Intent it =getIntent();
-        Carro carro= (Carro) it.getSerializableExtra("carro");
+        carro= (Carro) it.getSerializableExtra("carro");
         if(carro!=null) {
             nome.setText(carro.getNome());
             placa.setText(carro.getPlaca());
+            ano.setText(carro.getAno().toString());
         }
 
     }
@@ -50,8 +48,12 @@ public class CadastroVeiculo extends AppCompatActivity {
      * @param view
      */
     public  void salvarVeiculo(View view){
+        bancoDados = new BancoDados(this);
+        carroDaoBanco = new CarroDaoBanco(bancoDados.getWritableDatabase());
         //crio carro
-        Carro carro = new Carro();
+
+        if(carro==null)
+            carro = new Carro();
         //pego os dados e preencho o carro
 
 
@@ -59,10 +61,16 @@ public class CadastroVeiculo extends AppCompatActivity {
             carro.setNome(nome.getText().toString());
             carro.setAno(Integer.parseInt(ano.getText().toString()));
             carro.setPlaca(placa.getText().toString());
+
             //salvo carro na lista
-            carroDaoBanco.inserirVeiculo(carro);
+            if(carro.getId()!=null && carro.getId()>0)
+                carroDaoBanco.atualizarVeiculo(carro);
+            else
+                carroDaoBanco.inserirVeiculo(carro);
+
+
             //verifico se foi salvo
-            System.out.println(CarroDao.getDados());
+          //  System.out.println(CarroDao.getDados());
             //  finish();//fecha
             setResult(RESULT_OK);
             super.onBackPressed();
