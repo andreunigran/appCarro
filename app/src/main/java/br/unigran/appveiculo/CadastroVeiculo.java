@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import br.unigran.db.BancoDados;
 import br.unigran.domain.dao.CarroDaoBanco;
@@ -21,6 +23,7 @@ public class CadastroVeiculo extends AppCompatActivity {
     private BancoDados bancoDados;
     private CarroDaoBanco carroDaoBanco;
     private Carro carro;
+    private Spinner dados;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +33,9 @@ public class CadastroVeiculo extends AppCompatActivity {
         nome= findViewById(R.id.nome_veiculo);
         ano= findViewById(R.id.ano);
         placa= findViewById(R.id.placa);
-
+        dados=findViewById(R.id.spinner);
+        ArrayAdapter adapter= ArrayAdapter.createFromResource(this,R.array.dados,android.R.layout.select_dialog_multichoice);
+        dados.setAdapter(adapter);
 
 
         Intent it =getIntent();

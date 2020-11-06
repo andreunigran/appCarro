@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "848539403572",
+    "firebase_url": "https://teste-andre-b17c6.firebaseio.com",
+    "project_id": "teste-andre-b17c6",
+    "storage_bucket": "teste-andre-b17c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848539403572:android:72b49e24be15c0587e1161",
+        "android_client_info": {
+          "package_name": "br.unigran.novofirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848539403572-durt2sv8e8qhfkhnjsost15traofbjjm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.unigran.novofirebase",
+            "certificate_hash": "5a62a90419c635161fd9a4cdbb7e2022111b2d94"
+          }
+        },
+        {
+          "client_id": "848539403572-aa9ktv8g9n3bj97fllfgouud4jm2rl2a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoc8uf35ZrIXt019JbLddG66QaLKTd8-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848539403572-aa9ktv8g9n3bj97fllfgouud4jm2rl2a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
